@@ -76,11 +76,15 @@ function playSound() {
 
     // You need to figure out a way to randomly get an index
     // ie: replace boredItems[0]: boredItems[random Number here]
+    for(let i=0; i<=boredItems.length; i++) {
     boredElement.innerHTML = boredItems[[Math.floor(Math.random()*boredItems.length)]].activity;
-
+    // boredElement.innerHTML = boredItems[[Math.floor(Math.random()*boredItems.length)]].type;
+    // boredElement.innerHTML = boredItems[[Math.floor(Math.random()*boredItems.length)]].participants;
+    // boredElement.innerHTML = boredItems[[Math.floor(Math.random()*boredItems.length)]].price;
+    }
     // Or you could use DOM manipulation to render all of the jokes that are stored in the boredItems array
 
-    var delay = 1600;
+    var delay = 600;
     setTimeout(unpress, delay);
 }
 dance.addEventListener('click', function (event) { playSound() });
