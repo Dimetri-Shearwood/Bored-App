@@ -10,7 +10,18 @@ if (contextClass) {
 
 var request = new XMLHttpRequest();
 
-request.open('GET', true);
+// function audio() {
+//     let soundFX = "https://www.youtube.com/watch?v=h6_8SlZZwvQ";
+//     let audioFX = document.createElement("audio");
+//     let div = document.createElement("div");
+//     audioFX.innerHTML = soundFX;
+//     div.appendChild(audioFX);
+// }
+// audio();
+
+let audio = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/gonna-make-you-sweat.mp3";
+
+request.open('GET', audio, true);
 request.responseType = 'arraybuffer';
 request.onload = function () {
     context.decodeAudioData(request.response, function (theBuffer) {
@@ -65,11 +76,11 @@ function playSound() {
 
     // You need to figure out a way to randomly get an index
     // ie: replace boredItems[0]: boredItems[random Number here]
-    boredElement.innerHTML = boredItems[0].activity
+    boredElement.innerHTML = boredItems[[Math.floor(Math.random()*boredItems.length)]].activity;
 
     // Or you could use DOM manipulation to render all of the jokes that are stored in the boredItems array
 
-    var delay = 2000;
-    setTimeout(unpress(), delay);
+    var delay = 1600;
+    setTimeout(unpress, delay);
 }
 dance.addEventListener('click', function (event) { playSound() });
