@@ -36,16 +36,17 @@ let boredItems
 // here we are getting the h1 tag from our HTML
 let boredElement = document.querySelector('.bored-element')
 
+let card = document.createElement('div');
+let title = document.createElement('h1');
+let activityList = document.createElement('ul');
+let activityListItem = document.createElement('li');
+
+
 const getBored = async () => {
     // The async keyword allows you to utilize the await keyword which replaces the .then() syntax
     // Now you can write code more concisely
     let res = await fetch(URL)
-    let json = await res.json()
-
-    console.log(json)
-
-    // We are setting the value of the boredItems variable to the JSON data we got back from our api call
-    boredItems = json
+    boredItems = await res.json()
 
     console.log(boredItems)
     // Fetch return a URL encode data stream
@@ -69,10 +70,10 @@ function unpress() { dance.classList.remove("pressed"); }
 
 function playSound() {
     dance.classList.add("pressed");
-    var source = context.createBufferSource();
-    source.buffer = buffer;
-    source.connect(context.destination);
-    source.start(0);
+    // var source = context.createBufferSource();
+    // source.buffer = buffer;
+    // source.connect(context.destination);
+    // source.start(0);
 
     // You need to figure out a way to randomly get an index
     // ie: replace boredItems[0]: boredItems[random Number here]
