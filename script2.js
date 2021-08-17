@@ -33,15 +33,23 @@ let URL = 'https://boredapp2021.herokuapp.com/'
 // We created an empty variable which will store all the data from our api call
 let boredItems
 
-// here we are getting the h1 tag from our HTML
-let boredElement = document.querySelector('.bored-element')
 
-const createActivityCard = () => {
-    
+
+// Need a function that creates a div, h1, and ul
+// Also will need to create li's for each sub0thing (participants, price, type)
+// We will need to create the li's dynamically
+// ?how should we do this?
+
+
+
+
+
+
+const createActivityListItems = (arrayOfActivityItems) => {
+
 }
-let card = document.createElement('div');
-let title = document.createElement('h1');
-let activityList = document.createElement('ul');
+
+
 let activityListItem = document.createElement('li');
 
 
@@ -71,6 +79,42 @@ function onError() { console.log("Bad browser! No Web Audio API for you"); }
 
 function unpress() { dance.classList.remove("pressed"); }
 
+
+let body = document.querySelector('body')
+
+// here we are getting the h1 tag from our HTML
+let boredElement = document.querySelector('.bored-element')
+let arrayOfActivityClasses = ['participants', 'type', 'price']
+let title = document.createElement('h1');
+
+let createActivityCard = () => {
+    let card = document.createElement('div');
+    let activityList = document.createElement('ul');
+
+    card.className = "activity-card"
+    title.className = "activity-title"
+    activityList.className = "activity-list"
+
+    card.appendChild(title)
+    card.appendChild(activityList)
+    body.appendChild(card)
+
+    arrayOfActivityClasses.map(activityClass => {
+        let createdLi = document.createElement('li')
+
+        createdLi.className = activityClass
+        createdLi.hidden = true
+
+        activityList.appendChild(createdLi)
+    })
+
+}
+
+createActivityCard()
+
+
+let trackItemCount = 0
+
 function playSound() {
     dance.classList.add("pressed");
     // var source = context.createBufferSource();
@@ -80,12 +124,43 @@ function playSound() {
 
     // You need to figure out a way to randomly get an index
     // ie: replace boredItems[0]: boredItems[random Number here]
-    for(let i=0; i<=boredItems.length; i++) {
-    boredElement.innerHTML = boredItems[[Math.floor(Math.random()*boredItems.length)]].activity;
-    // boredElement.innerHTML = boredItems[[Math.floor(Math.random()*boredItems.length)]].type;
-    // boredElement.innerHTML = boredItems[[Math.floor(Math.random()*boredItems.length)]].participants;
-    // boredElement.innerHTML = boredItems[[Math.floor(Math.random()*boredItems.length)]].price;
-    }
+
+
+
+    let randomNumber = Math.floor(Math.random() * boredItems.length)
+
+    let { participants, type, price } = boredItems[randomNumber]
+    let arrayOfActivityItems = [participants, type, price]
+
+    // for (let i = 0; i < arrayOfActivityItems.length; i++) {
+    //     const item = arrayOfActivityItems[i];
+
+    //     let createdLi = document.createElement('li')
+
+    //     createdLi.innerHTML =item
+
+    // }
+
+    let activityListItems = arrayOfActivityItems.map((item, index) => {
+
+        let className = arrayOfActivityClasses[index]
+        console.log(item)
+        let grabListItem = document.querySelector(`.${className}`)
+
+        console.log(grabListItem)
+
+        grabListItem.innerHTML = `<span class="something">${className}:</span> ${item}`
+        grabListItem.hidden = false
+
+        // activityList.appendChild(createdLi)
+    })
+
+
+
+    title.innerHTML = boredItems[randomNumber].activity
+
+
+
     // Or you could use DOM manipulation to render all of the jokes that are stored in the boredItems array
 
     var delay = 600;
