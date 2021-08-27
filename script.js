@@ -10,16 +10,12 @@ if (contextClass) {
 
 var request = new XMLHttpRequest();
 
-// function audio() {
-//     let soundFX = "https://www.youtube.com/watch?v=h6_8SlZZwvQ";
-//     let audioFX = document.createElement("audio");
-//     let div = document.createElement("div");
-//     audioFX.innerHTML = soundFX;
-//     div.appendChild(audioFX);
-// }
-// audio();
+// let audio = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/gonna-make-you-sweat.mp3";
 
-let audio = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/gonna-make-you-sweat.mp3";
+let audio = new Audio("./click.mp3");
+document.onclick = function () {
+    audio.play();
+};
 
 request.open('GET', audio, true);
 request.responseType = 'arraybuffer';
@@ -101,22 +97,22 @@ let createActivityCard = () => {
 
 createActivityCard()
 
-function playSound() {
+function playSound(e) {
+    // console.log(e);
+    e.preventDefault();
     dance.classList.add("pressed");
 
+    // Turn This code on to run sound when button is clicked
 
     // var source = context.createBufferSource();
     // source.buffer = buffer;
     // source.connect(context.destination);
     // source.start(0);
 
-    // You need to figure out a way to randomly get an index
-    // ie: replace boredItems[0]: boredItems[random Number here]
-
-
 
     let randomNumber = Math.floor(Math.random() * boredItems.length)
 
+    //deconstruction curly brackets allows us to deconstruct an object
     let { participants, type, price } = boredItems[randomNumber]
     let arrayOfActivityItems = [participants, type, price]
 
@@ -129,7 +125,7 @@ function playSound() {
 
     // }
 
-    let activityListItems = arrayOfActivityItems.map((item, index) => {
+    arrayOfActivityItems.forEach((item, index) => {
 
         let className = arrayOfActivityClasses[index]
         console.log(item)

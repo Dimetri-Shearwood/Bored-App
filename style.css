@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 html { height: 100%; }
 body { min-height: 100%; margin: 0; display: flex; justify-content: center; align-items: center; }
 button { 
@@ -33,3 +36,12 @@ button span { position: relative; }
 .something{
   font-weight: bold;
 }
+
+/* div {
+   display: inline;
+   justify-content: center;
+   border: 1px solid red;
+   padding: 10px;
+   position: relative;
+  bottom: 20px;
+} */
